@@ -6,105 +6,68 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 18:00:36 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/01 21:03:01 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/03 18:09:23 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_ishalfsort(t_stack *stk, int piv, int side)
+int		ft_stklen(t_stack *stk)
 {
-	t_stack *tmp;
+    int i;
 
-	tmp = stk;
-	while (stk->nb <= max && stk->next != NULL)
+    i = 0;
+    while (stk)
 	{
-		if (stk->nb >= min)
-		{
-			if (stk->nb > stk->next->nb)
-				return (0);
-		}
+		i++;
 		stk = stk->next;
 	}
-	ft_printf("\n%d   ,   %d\n", min, max);
-	ft_print(tmp);
-	return (1);
+    return (i);
 }
 
-int		ft_stknext(t_stack *stk, int min, int max)
+int		ft_stknext(t_stack *stk, int *ind)
 {
-	int piv;
-	int c;
 	int i;
 	int j;
+	int c;
 
-	piv = (min + max) / 2;
-	c = 0;
 	i = 0;
-	j = 0;
+	c = 0;
+	j = ft_stklen(stk) / 2;
+	*ind = stk->nb;
 	while (stk)
 	{
-		if (!c)
+		if (*ind < stk->nb)
 		{
-			if (stk->nb < piv)
-				c = 1;
-			i++;
+			*ind = stk->nb;
+			c = i;
 		}
-		else
-			j++;
+		i++;
 		stk = stk->next;
 	}
-	return ((c) ? ((i > j) ? 2 : 1) : 0);
+	return ((c <= j) ? 1 : 0);
 }
 
-void	ft_pivot(t_stack *stk, int *min, int *max)
+void	ft_stksort(t_stack **sta, t_stack **stb)
 {
-	*min = 0;
-	*max = 0;
-	while (stk)
-	{
-		*min = (stk->nb < *min) ? stk->nb : *min;
-		*max = (stk->nb > *max) ? stk->nb : *max;
-		stk = stk->next;
-	}
-}
+	int i;
+	int ind;
 
-void    ft_pushhalf(t_stack **src, t_stack **dst, int min, int max)
-{
-	int		piv;
-	int		c;
-
-	piv = (min + max) / 2;
-	while ((c = ft_stknext(*src, min, max)))
+	i = 0;
+	while ((*sta))
+		ft_stkpush(sta, stb, "pb\n");
+	while ((*stb))
 	{
-		if ((*src)->nb < piv)
+		if (ft_stknext(*stb, &ind))
 		{
-			if ((*src)->nb > (*src)->next->nb && (*src)->next->nb < piv)
-				ft_stkswap(src, "sa\n");
-			ft_stkpush(src, dst, "pb\n");
+			while ((*stb)->nb != ind)
+				ft_stkrot(stb, "rb\n");
 		}
-		else if (c == 1)
-			ft_stkrot(src, "ra\n");
 		else
-			ft_stkrevrot(src, "rra\n");
-	}/*
-	ft_printf("\n**%d**\n", piv);
-	ft_print(*src);
-	ft_printf("\n-----------------------------%d-------------------------------------", c);*/
-}
-
-void		ft_stksort(t_stack **sta, t_stack **stb, int min, int max)
-{
-	int		piv;
-
-	piv = (min + max) / 2;
-	ft_pushhalf(sta, stb, min, max);
-	while (*stb)
+		{
+			while ((*stb)->nb != ind)
+				ft_stkrevrot(stb, "rrb\n");
+		}
 		ft_stkpush(stb, sta, "pa\n");
-	if (piv == min + 1 || piv == max - 1)
-		return ;
-	if (!ft_ishalfsort(*sta, min, piv))
-		ft_stksort(sta, stb, min, piv);
-	if (!ft_ishalfsort(*sta, piv, max))
-		ft_stksort(sta, stb, piv, max);
+	}
 }
