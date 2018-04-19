@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:34:41 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/01 18:45:28 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/19 15:09:16 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_print(t_stack *sta)
 	}
 }
 
-void	ft_stkswap(t_stack **stk, char *s)
+void	ft_stkswap(t_stack **stk)
 {
 	int tmp;
 
@@ -30,11 +30,9 @@ void	ft_stkswap(t_stack **stk, char *s)
 	tmp = (*stk)->nb;
 	(*stk)->nb = (*stk)->next->nb;
 	(*stk)->next->nb = tmp;
-	if (s)
-		ft_putstr(s);
 }
 
-void	ft_stkpush(t_stack **src, t_stack **dst, char *s)
+void	ft_stkpush(t_stack **src, t_stack **dst)
 {
 	t_stack *tmp;
 
@@ -44,11 +42,9 @@ void	ft_stkpush(t_stack **src, t_stack **dst, char *s)
 	(*src)->next = *dst;
 	*dst = *src;
 	*src = tmp;
-	if (s)
-		ft_putstr(s);
 }
 
-void	ft_stkrot(t_stack **stk, char *s)
+void	ft_stkrot(t_stack **stk)
 {
 	t_stack *tmp;
 	t_stack *sec;
@@ -62,11 +58,9 @@ void	ft_stkrot(t_stack **stk, char *s)
 	tmp->next = *stk;
 	(*stk)->next = NULL;
 	*stk = sec;
-	if (s)
-		ft_putstr(s);
 }
 
-void	ft_stkrevrot(t_stack **stk, char *s)
+void	ft_stkrevrot(t_stack **stk)
 {
 	t_stack *tmp;
 	t_stack *sec;
@@ -80,6 +74,4 @@ void	ft_stkrevrot(t_stack **stk, char *s)
 	tmp->next->next = *stk;
 	*stk = tmp->next;
 	sec->next = NULL;
-	if (s)
-		ft_putstr(s);
 }

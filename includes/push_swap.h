@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:46:25 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/03 18:01:52 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/19 21:30:22 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ int				ft_validrl(char *str);
 t_stack			*ft_fillsta(t_stack *sta, char **av);
 t_rule			*ft_addrule(t_rule *srule, char *str);
 void			ft_apply(t_rule *srule, t_stack **sta, t_stack **stb);
-void			ft_stkswap(t_stack **stk, char *s);
-void			ft_stkpush(t_stack **src, t_stack **dst, char *s);
-void			ft_stkrot(t_stack **stk, char *s);
-void			ft_stkrevrot(t_stack **stk, char *s);
+void			ft_stkswap(t_stack **stk);
+void			ft_stkpush(t_stack **src, t_stack **dst);
+void			ft_stkrot(t_stack **stk);
+void			ft_stkrevrot(t_stack **stk);
 int				ft_checksort(t_stack *sta, t_stack *stb);
-void			ft_stksort(t_stack **sta, t_stack **stb);
-int				ft_stklen(t_stack *stk);
-int				ft_stknext(t_stack *stk, int *ind);
-
+char			*ft_stksort(t_stack **sta, t_stack **stb, int step);
+char			*ft_stkcustomsort(t_stack **sta, t_stack **stb);
 void			ft_print(t_stack *sta);
 
 #endif

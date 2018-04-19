@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 18:00:36 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/01 18:43:46 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/18 17:38:13 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@ static int     ft_stklen(t_stack *stk)
     return (i);
 }
 
-void			ft_stksort(t_stack **sta, t_stack **stb)
+void			ft_stkbubblesort(t_stack **sta, t_stack **stb)
 {
 	int		c;
 	int		i;
 
 	c = ft_stklen((*sta));
 	i = 0;
-    str = ft_strnew(0);
 	while (i < c)
 	{
 		if ((*sta)->nb > (*sta)->next->nb)
@@ -48,5 +47,4 @@ void			ft_stksort(t_stack **sta, t_stack **stb)
 				i = c;
 		}
 	}
-    ft_putstr(str);
 }

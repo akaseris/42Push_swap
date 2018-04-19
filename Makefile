@@ -6,7 +6,7 @@
 #    By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 16:35:26 by akaseris          #+#    #+#              #
-#    Updated: 2018/03/30 18:11:04 by akaseris         ###   ########.fr        #
+#    Updated: 2018/04/18 17:42:14 by akaseris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB = libft/libft.a
 FLAGS = -Wall -Werror -Wextra
 
 FT = ft_checker ft_push_swap
-FT_OTHER = ft_validinp ft_rules ft_moves ft_sort
+FT_OTHER = ft_validinp ft_rules ft_moves ft_sort g_ft_customsort
 
 FT_O = $(patsubst %,%.o,$(FT) $(FT_OTHER))
 FT_O_OBJ = $(patsubst %,$(OBJ)%.o,$(FT) $(FT_OTHER))
