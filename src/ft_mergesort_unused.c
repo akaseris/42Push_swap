@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_ft_mergesort.c                                   :+:      :+:    :+:   */
+/*   ft_mergesort_unused.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 17:45:50 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/03 17:46:38 by akaseris         ###   ########.fr       */
+/*   Created: 2018/04/21 14:45:09 by akaseris          #+#    #+#             */
+/*   Updated: 2018/04/21 15:22:12 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_stklen(t_stack *stk)
+static int	ft_stklen(t_stack *stk)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (stk)
+	i = 0;
+	while (stk)
 	{
 		i++;
 		stk = stk->next;
 	}
-    return (i);
+	return (i);
 }
 
-int		ft_ishalfsort(t_stack *stk, int min, int max)
+static int	ft_ishalfsort(t_stack *stk, int min, int max)
 {
 	int gap;
 
@@ -41,14 +41,9 @@ int		ft_ishalfsort(t_stack *stk, int min, int max)
 	return (1);
 }
 
-void	ft_merge(t_stack **src, t_stack **dst, int min, int max, int piv)
+static void	ft_merge(t_stack **src, t_stack **dst, int piv)
 {
-	int i;
-
-	i = piv;
-	max = 0;
-	min = 0;
-	while (i--)
+	while (piv--)
 	{
 		if ((*src)->next != NULL && (*src)->nb > (*src)->next->nb)
 			ft_stkswap(src, "sa\n");
@@ -64,7 +59,7 @@ void	ft_merge(t_stack **src, t_stack **dst, int min, int max, int piv)
 	}
 }
 
-void	ft_stksort(t_stack **sta, t_stack **stb, int min, int max)
+void		ft_stksort(t_stack **sta, t_stack **stb, int min, int max)
 {
 	int piv;
 

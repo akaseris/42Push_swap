@@ -6,11 +6,30 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 14:14:22 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/19 15:09:49 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:30:16 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_rule	*ft_getrules(t_rule *srule)
+{
+	int		r;
+	char	*tmp;
+
+	while ((r = get_next_line(0, &tmp)))
+	{
+		if (r == 2)
+		{
+			if (!(srule = ft_addrule(srule, tmp)) || !(ft_validrl(tmp)))
+				return (NULL);
+			free(tmp);
+		}
+		else if (tmp[0] != '\0')
+			return (NULL);
+	}
+	return (srule);
+}
 
 t_rule	*ft_addrule(t_rule *srule, char *str)
 {
@@ -54,17 +73,4 @@ void	ft_apply(t_rule *srule, t_stack **sta, t_stack **stb)
 			ft_stkrevrot(stb);
 		srule = srule->next;
 	}
-}
-
-int		ft_checksort(t_stack *sta, t_stack *stb)
-{
-	if (stb != NULL)
-		return (0);
-	while (sta->next)
-	{
-		if (sta->nb > sta->next->nb)
-			return (0);
-		sta = sta->next;
-	}
-	return (1);
 }

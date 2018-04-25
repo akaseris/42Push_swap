@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:46:25 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/19 21:30:22 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:30:07 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_rule
 int				ft_validinp(char **av);
 int				ft_validrl(char *str);
 t_stack			*ft_fillsta(t_stack *sta, char **av);
+t_rule			*ft_getrules(t_rule *srule);
 t_rule			*ft_addrule(t_rule *srule, char *str);
 void			ft_apply(t_rule *srule, t_stack **sta, t_stack **stb);
 void			ft_stkswap(t_stack **stk);
@@ -41,6 +42,10 @@ void			ft_stkrevrot(t_stack **stk);
 int				ft_checksort(t_stack *sta, t_stack *stb);
 char			*ft_stksort(t_stack **sta, t_stack **stb, int step);
 char			*ft_stkcustomsort(t_stack **sta, t_stack **stb);
+int				ft_pivot(t_stack *stk, int step);
+int				ft_stklen(t_stack *stk);
+int				ft_stksum(t_stack *stk);
+int				ft_stkdif(t_stack *stk, int inc);
 void			ft_print(t_stack *sta);
 
 #endif

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_ft_bubblesort.c                                  :+:      :+:    :+:   */
+/*   ft_bubblesort_unused.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/30 18:00:36 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/18 17:38:13 by akaseris         ###   ########.fr       */
+/*   Created: 2018/04/21 14:44:51 by akaseris          #+#    #+#             */
+/*   Updated: 2018/04/21 15:24:51 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int     ft_stklen(t_stack *stk)
+static int	ft_stklen(t_stack *stk)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (stk)
+	i = 0;
+	while (stk)
 	{
 		i++;
 		stk = stk->next;
 	}
-    return (i);
+	return (i);
 }
 
-void			ft_stkbubblesort(t_stack **sta, t_stack **stb)
+void		ft_stkbubblesort(t_stack **sta, t_stack **stb)
 {
 	int		c;
 	int		i;

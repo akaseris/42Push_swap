@@ -1,58 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort.c                                          :+:      :+:    :+:   */
+/*   ft_quicksort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:43 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/19 21:14:36 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:42:59 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_stknext(t_stack *stk, int piv)
+static int	ft_stkpivnext(t_stack *stk, int piv)
 {
-	int c;
 	int i;
 	int j;
+	int c;
 
-	c = 0;
 	i = 0;
-	j = 0;
+	c = 0;
+	j = ft_stklen(stk) / 2;
 	while (stk)
 	{
-		if (!c)
+		if (stk->nb <= piv)
 		{
-			if (stk->nb < piv)
-				c = 1;
-			i++;
+			c = i + 1;
+			break ;
 		}
-		else
-			j++;
+		i++;
 		stk = stk->next;
 	}
-	piv = (i > j) ? 2 : 1;
+	piv = (c > j + 1) ? 2 : 1;
 	return ((c) ? piv : 0);
-}
-
-static int	ft_pivot(t_stack *stk, int step)
-{
-	int min;
-	int max;
-	int piv;
-
-	min = stk->nb;
-	max = stk->nb;
-	while (stk)
-	{
-		min = (stk->nb < min) ? stk->nb : min;
-		max = (stk->nb > max) ? stk->nb : max;
-		stk = stk->next;
-	}
-	piv = (max - min > step) ? min + step : (min + max) / 2;
-	return (piv);
 }
 
 static char	*ft_pushhalf(t_stack **src, t_stack **dst, int piv)
@@ -61,9 +41,9 @@ static char	*ft_pushhalf(t_stack **src, t_stack **dst, int piv)
 	char	*str;
 
 	str = ft_strnew(0);
-	while ((c = ft_stknext(*src, piv)))
+	while ((c = ft_stkpivnext(*src, piv)))
 	{
-		if ((*src)->nb < piv)
+		if ((*src)->nb <= piv)
 		{
 			ft_stkpush(src, dst);
 			str = ft_strjoinfree(str, str, "pb\n");
@@ -82,11 +62,13 @@ static char	*ft_pushhalf(t_stack **src, t_stack **dst, int piv)
 	return (str);
 }
 
-char	*ft_stksort(t_stack **sta, t_stack **stb, int step)
+char		*ft_stksort(t_stack **sta, t_stack **stb, int step)
 {
 	int		piv;
 	char	*str;
 
+	if (ft_checksort(*sta, *stb))
+		return ("");
 	str = ft_strnew(0);
 	while ((*sta)->next)
 	{

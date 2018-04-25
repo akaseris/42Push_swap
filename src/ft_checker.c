@@ -6,30 +6,11 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 16:36:33 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/18 16:49:57 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:29:38 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_rule	*ft_getrules(t_rule *srule)
-{
-	int		r;
-	char	*tmp;
-
-	while ((r = get_next_line(0, &tmp)))
-	{
-		if (r == 2)
-		{
-			if (!(srule = ft_addrule(srule, tmp)) || !(ft_validrl(tmp)))
-				return (NULL);
-			free(tmp);
-		}
-		else if (tmp[0] != '\0')
-			return (NULL);
-	}
-	return (srule);
-}
 
 int				main(int ac, char **av)
 {

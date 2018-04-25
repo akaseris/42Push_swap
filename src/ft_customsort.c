@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_ft_customsort.c                                  :+:      :+:    :+:   */
+/*   ft_customsort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 18:00:36 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/19 21:30:19 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:46:54 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_stklen(t_stack *stk)
-{
-	int i;
-
-	i = 0;
-	while (stk)
-	{
-		i++;
-		stk = stk->next;
-	}
-	return (i);
-}
-
-static int	ft_stkisnext(t_stack *stk, int *ind)
+static int	ft_stkminnext(t_stack *stk, int *ind)
 {
 	int i;
 	int j;
@@ -45,7 +32,28 @@ static int	ft_stkisnext(t_stack *stk, int *ind)
 		i++;
 		stk = stk->next;
 	}
+	if (c == 1)
+		return (2);
 	return ((c <= j) ? 1 : 0);
+}
+
+static void	ft_move(t_stack **stb, int pos, char **str)
+{
+	if (pos == 1)
+	{
+		ft_stkrot(stb);
+		*str = ft_strjoinfree(*str, *str, "rb\n");
+	}
+	else if (pos == 2)
+	{
+		ft_stkswap(stb);
+		*str = ft_strjoinfree(*str, *str, "sb\n");
+	}
+	else
+	{
+		ft_stkrevrot(stb);
+		*str = ft_strjoinfree(*str, *str, "rrb\n");
+	}
 }
 
 char		*ft_stkcustomsort(t_stack **sta, t_stack **stb)
@@ -57,20 +65,9 @@ char		*ft_stkcustomsort(t_stack **sta, t_stack **stb)
 	str = ft_strnew(0);
 	while ((*stb))
 	{
-		pos = ft_stkisnext(*stb, &ind);
+		pos = ft_stkminnext(*stb, &ind);
 		while ((*stb)->nb != ind)
-		{
-			if (pos)
-			{
-				ft_stkrot(stb);
-				str = ft_strjoinfree(str, str, "rb\n");
-			}
-			else
-			{
-				ft_stkrevrot(stb);
-				str = ft_strjoinfree(str, str, "rrb\n");
-			}
-		}
+			ft_move(stb, pos, &str);
 		ft_stkpush(stb, sta);
 		str = ft_strjoinfree(str, str, "pa\n");
 	}
