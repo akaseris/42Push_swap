@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoli.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 16:08:34 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/09 15:56:27 by akaseris         ###   ########.fr       */
+/*   Created: 2018/05/09 15:56:54 by akaseris          #+#    #+#             */
+/*   Updated: 2018/05/09 18:10:40 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_atoi(const char *str)
+long long int	ft_atoli(const char *str)
 {
-	int r;
-	int i;
-	int minus;
+	long long int	r;
+	int				i;
+	int				minus;
 
 	r = 0;
 	i = 0;

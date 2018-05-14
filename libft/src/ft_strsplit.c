@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akaseris <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 22:37:57 by akaseris          #+#    #+#             */
-/*   Updated: 2017/11/25 16:14:40 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:38:47 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ char		**ft_strsplit(char const *s, char c)
 {
 	char **split;
 
-	if (!s || !c)
-		return (0);
+	if (!s || !c || s[0] == '\0')
+		return (NULL);
 	split = NULL;
 	if (!(split = ft_allocrow(split, (char *)s, c)))
-		return (0);
+		return (NULL);
 	if (!(split = ft_alloccol(split, (char *)s, c)))
-		return (0);
+		return (NULL);
 	split = ft_filltbl(split, (char *)s, c);
 	return (split);
 }

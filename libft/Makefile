@@ -6,7 +6,7 @@
 #    By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 16:05:02 by akaseris          #+#    #+#              #
-#    Updated: 2018/03/29 15:11:25 by akaseris         ###   ########.fr        #
+#    Updated: 2018/05/09 15:58:35 by akaseris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FT = ft_putchar ft_putstr ft_strcmp ft_strlen ft_strdup ft_strcpy ft_strcat \
 		ft_utoa_base ft_convertunicode ft_strunicode ft_strmove ft_checkunicode \
 		ft_strjoinfree ft_ftoa ft_printf ft_assign ft_alpha ft_handle \
 		ft_process ft_form ft_snb1 ft_snb2 ft_unb1 ft_unb2 ft_printbuf ft_sprint \
-		get_next_line
+		get_next_line ft_deltab ft_atoli
 
 SRC = src/
 INC = includes/

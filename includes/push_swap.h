@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 13:46:25 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/25 20:30:07 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/14 16:14:02 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,12 @@ typedef struct	s_stack
 	struct s_stack	*next;
 }				t_stack;
 
-typedef struct	s_rule
-{
-	char			*s;
-	struct s_rule	*next;
-}				t_rule;
-
 int				ft_validinp(char **av);
 int				ft_validrl(char *str);
+int				ft_checkdup(t_stack *sta);
 t_stack			*ft_fillsta(t_stack *sta, char **av);
-t_rule			*ft_getrules(t_rule *srule);
-t_rule			*ft_addrule(t_rule *srule, char *str);
-void			ft_apply(t_rule *srule, t_stack **sta, t_stack **stb);
+int				ft_getrules(t_stack **sta, t_stack **stb);
+void			ft_apply(char *rule, t_stack **sta, t_stack **stb);
 void			ft_stkswap(t_stack **stk);
 void			ft_stkpush(t_stack **src, t_stack **dst);
 void			ft_stkrot(t_stack **stk);
@@ -46,6 +40,8 @@ int				ft_pivot(t_stack *stk, int step);
 int				ft_stklen(t_stack *stk);
 int				ft_stksum(t_stack *stk);
 int				ft_stkdif(t_stack *stk, int inc);
-void			ft_print(t_stack *sta);
+char			*ft_flags(char **av);
+char			*ft_color(char *s);
+void			ft_printres(t_stack *sta, char **av, char *moves, char *flags);
 
 #endif

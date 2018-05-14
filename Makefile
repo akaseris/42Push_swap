@@ -6,7 +6,7 @@
 #    By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 16:35:26 by akaseris          #+#    #+#              #
-#    Updated: 2018/04/25 20:31:27 by akaseris         ###   ########.fr        #
+#    Updated: 2018/05/14 14:42:03 by akaseris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB = libft/libft.a
 FLAGS = -Wall -Werror -Wextra
 
 FT = ft_checker ft_push_swap
-FT_OTHER = ft_input ft_rules ft_moves ft_quicksort ft_customsort ft_tools
+FT_OTHER = ft_input ft_rules ft_moves ft_quicksort ft_customsort ft_tools ft_print
 
 FT_O = $(patsubst %,%.o,$(FT) $(FT_OTHER))
 FT_O_OBJ = $(patsubst %,$(OBJ)%.o,$(FT) $(FT_OTHER))
@@ -30,16 +30,14 @@ FT_O_OBJ_2 = $(OBJ)ft_push_swap.o
 FT_O_OBJ_OTHER = $(patsubst %,$(OBJ)%.o,$(FT_OTHER))
 FT_C = $(patsubst %,$(SRC)%.c,$(FT) $(FT_OTHER))
 
-
 .PHONY : all clean fclean re
 
 all: $(NAME1) $(NAME2)
-	@echo '\033[1;32m'***Push_Swap Project Compiled***'\033[0m'
 
 $(LIB):
 	@make -C libft/ all
 
-$(FT_O_OBJ): $(LIB)
+$(FT_O_OBJ): $(LIB) $(FT_C)
 	@echo '\033[0;34m'***Compiling Push_Swap***'\033[0m'
 	@gcc -I $(INC) $(FLAGS) -c $(FT_C)
 	@mkdir $(OBJ) 2> /dev/null || true
@@ -47,7 +45,7 @@ $(FT_O_OBJ): $(LIB)
 
 $(NAME1): $(FT_O_OBJ)
 	@gcc -o $(NAME1) $(FT_O_OBJ_OTHER) $(FT_O_OBJ_1) libft/libft.a
-	@echo '\033[0;32m'***Checker Compiled***'\033[0m'
+	@echo '\033[0;32m'***checker Compiled***'\033[0m'
 
 $(NAME2): $(FT_O_OBJ)
 	@gcc -o $(NAME2) $(FT_O_OBJ_OTHER) $(FT_O_OBJ_2) libft/libft.a

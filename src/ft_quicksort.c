@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 13:53:43 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/25 20:42:59 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:28:47 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,18 @@ char		*ft_stksort(t_stack **sta, t_stack **stb, int step)
 {
 	int		piv;
 	char	*str;
+	char	*tmp;
 
-	if (ft_checksort(*sta, *stb))
-		return ("");
 	str = ft_strnew(0);
-	while ((*sta)->next)
+	while ((*sta)->next && !ft_checksort(*sta, NULL))
 	{
 		piv = ft_pivot((*sta), step);
-		str = ft_strjoinfree(str, str, ft_pushhalf(sta, stb, piv));
+		tmp = ft_pushhalf(sta, stb, piv);
+		str = ft_strjoinfree(str, str, tmp);
+		free(tmp);
 	}
-	str = ft_strjoinfree(str, str, ft_stkcustomsort(sta, stb));
+	tmp = ft_stkcustomsort(sta, stb);
+	str = ft_strjoinfree(str, str, tmp);
+	free(tmp);
 	return (str);
 }

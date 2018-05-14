@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 16:29:32 by akaseris          #+#    #+#             */
-/*   Updated: 2018/03/28 13:01:58 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:09:35 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strndup(const char *s1, size_t n);
 int				ft_atoi(const char *str);
+long long int	ft_atoli(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
@@ -122,6 +123,7 @@ char			*ft_strmove(char *str, char blnk);
 int				ft_checkunicode(wchar_t *str);
 char			*ft_strjoinfree(char *ret, char *s1, char *s2);
 char			*ft_ftoa(double nb, int prc);
+void			ft_deltab(char **tab);
 
 int				ft_printf(const char *str, ...);
 char			*ft_assign(char *str, t_print *sprint, va_list ap);

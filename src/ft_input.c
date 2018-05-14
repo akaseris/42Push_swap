@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:14:06 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/25 20:32:31 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/14 14:42:53 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,76 @@ static void	ft_addlst(t_stack **ntmp, t_stack **stmp, t_stack **sta, char *s)
 	}
 }
 
+static int	ft_checkarg(char *s)
+{
+	int		j;
+
+	j = 1;
+	if ((s[0] != '-' && !ft_isdigit(s[0])) || ft_atoli(s) < -2147483648 ||
+			ft_atoli(s) > 2147483647 || ft_strlen(ft_itoa_base(ft_atoli(s), 10)) != ft_strlen(s) || (s[0] == '-' && s[1] == '\0'))
+		return (0);
+	while (ft_isdigit(s[j]))
+		j++;
+	if (s[j] != '\0' && j != 1)
+		return (0);
+	while (!ft_isdigit(s[j]) && s[j] != '\0')
+		j++;
+	if (s[j] != '\0' && j != 1)
+		return (0);
+	return (1);
+}
+
 int			ft_validinp(char **av)
 {
-	int		i;
+	int		k;
+	int		e;
+	char	**split;
+
+	e = 0;
+	while (*av)
+	{
+		split = ft_strsplit(*av, ' ');
+		k = 0;
+		while (split && split[k])
+		{
+			if (!ft_checkarg(split[k]))
+				return (0);
+			k++;
+		}
+		e = (k != 0) ? 1 : e;
+		ft_deltab(split);
+		av++;
+	}
+	return ((e) ? 1 : 0);
+}
+
+char		*ft_flags(char **av)
+{
+	char	*str;
 	int		j;
 	int		k;
 	char	**split;
 
-	i = 1;
-	while (av[i])
+	str = ft_strnew(0);
+	while (*av)
 	{
+		split = ft_strsplit(*av, ' ');
 		k = 0;
-		split = ft_strsplit(av[i], ' ');
-		while (split[k])
+		while (split && split[k])
 		{
 			j = 1;
-			if (split[k][0] != '-' && !ft_isdigit(split[k][0]))
-				return (0);
-			while (ft_isdigit(split[k][j]))
+			while (split[k][j] != '\0')
+			{
+				if (split[k][0] == '-' && ft_strchr("cvluh", split[k][j]))
+					str = ft_strjoinfree(str, str, &split[k][j]);
 				j++;
-			if (split[k][j] != '\0')
-				return (0);
+			}
 			k++;
 		}
-		i++;
+		av++;
+		ft_deltab(split);
 	}
-	return (1);
-}
-
-int			ft_validrl(char *str)
-{
-	char	*rls;
-	int		i;
-
-	rls = "sa,sb,ss,pa,pb,ra,rb,rr,rra,rrb,rrr";
-	if (ft_strstr(rls, str))
-	{
-		i = 0;
-		while (str[i] != '\0')
-		{
-			if (str[i] == ',')
-				return (0);
-			i++;
-		}
-		return (1);
-	}
-	return (0);
+	return (str);
 }
 
 t_stack		*ft_fillsta(t_stack *sta, char **av)
@@ -84,17 +108,19 @@ t_stack		*ft_fillsta(t_stack *sta, char **av)
 	int		i;
 	int		j;
 
-	i = 1;
+	i = 0;
 	while (av[i])
 	{
 		j = 0;
 		split = ft_strsplit(av[i], ' ');
-		while (split[j])
+		while (split && split[j])
 		{
-			ft_addlst(&ntmp, &stmp, &sta, split[j]);
+			if (!(split[j][0] == '-' && !ft_isdigit(split[j][1])))
+				ft_addlst(&ntmp, &stmp, &sta, split[j]);
 			j++;
 		}
 		i++;
+		ft_deltab(split);
 	}
 	return (sta);
 }

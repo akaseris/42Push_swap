@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 18:18:55 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/25 20:34:07 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:50:10 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	ft_stksum(t_stack *stk)
 		count++;
 		stk = stk->next;
 	}
-	return ((total / count) / 4);
+	sum = (total / count == 0) ? 1 : total / count;
+	return ((sum / 4 == 0) ? sum : sum / 4);
 }
 
 int	ft_pivot(t_stack *stk, int step)

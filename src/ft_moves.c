@@ -6,19 +6,31 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:34:41 by akaseris          #+#    #+#             */
-/*   Updated: 2018/04/19 15:09:16 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:02:35 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_print(t_stack *sta)
+char	*ft_color(char *s)
 {
-	while (sta)
-	{
-		ft_printf("%d\n", sta->nb);
-		sta = sta->next;
-	}
+	if (ft_strstr(s, "sb"))
+		return ("\e[32m");
+	else if (ft_strstr(s, "sa"))
+		return ("\e[42m");
+	else if (ft_strstr(s, "pb"))
+		return ("\e[34m");
+	else if (ft_strstr(s, "pa"))
+		return ("\e[44m");
+	else if (ft_strstr(s, "rrb"))
+		return ("\e[35m");
+	else if (ft_strstr(s, "rra"))
+		return ("\e[45m");
+	else if (ft_strstr(s, "rb"))
+		return ("\e[31m");
+	else if (ft_strstr(s, "ra"))
+		return ("\e[41m");
+	return ("");
 }
 
 void	ft_stkswap(t_stack **stk)
