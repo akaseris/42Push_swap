@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 17:14:06 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/14 14:42:53 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/20 17:25:15 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	ft_checkarg(char *s)
 	int		j;
 
 	j = 1;
-	if ((s[0] != '-' && !ft_isdigit(s[0])) || ft_atoli(s) < -2147483648 ||
-			ft_atoli(s) > 2147483647 || ft_strlen(ft_itoa_base(ft_atoli(s), 10)) != ft_strlen(s) || (s[0] == '-' && s[1] == '\0'))
+	if ((!ft_strchr("+-", s[0]) && !ft_isdigit(s[0])) ||
+		(ft_strchr("+-", s[0]) && s[1] == '\0') || !ft_over(s))
 		return (0);
 	while (ft_isdigit(s[j]))
 		j++;
@@ -61,7 +61,10 @@ int			ft_validinp(char **av)
 		while (split && split[k])
 		{
 			if (!ft_checkarg(split[k]))
+			{
+				ft_deltab(split);
 				return (0);
+			}
 			k++;
 		}
 		e = (k != 0) ? 1 : e;
@@ -74,7 +77,6 @@ int			ft_validinp(char **av)
 char		*ft_flags(char **av)
 {
 	char	*str;
-	int		j;
 	int		k;
 	char	**split;
 
@@ -85,12 +87,11 @@ char		*ft_flags(char **av)
 		k = 0;
 		while (split && split[k])
 		{
-			j = 1;
-			while (split[k][j] != '\0')
+			if (!ft_validflag(split[k], &str))
 			{
-				if (split[k][0] == '-' && ft_strchr("cvluh", split[k][j]))
-					str = ft_strjoinfree(str, str, &split[k][j]);
-				j++;
+				ft_strdel(&str);
+				ft_deltab(split);
+				return (NULL);
 			}
 			k++;
 		}

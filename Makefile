@@ -6,7 +6,7 @@
 #    By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/25 16:35:26 by akaseris          #+#    #+#              #
-#    Updated: 2018/05/14 14:42:03 by akaseris         ###   ########.fr        #
+#    Updated: 2018/05/20 21:57:01 by akaseris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,11 @@ INC = includes/
 OBJ = objects/
 LIB = libft/libft.a
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Wextra -Werror 
 
 FT = ft_checker ft_push_swap
-FT_OTHER = ft_input ft_rules ft_moves ft_quicksort ft_customsort ft_tools ft_print
+FT_OTHER = ft_input ft_rules ft_moves ft_quicksort ft_customsort ft_tools \
+			ft_tools2 ft_print ft_smallsort
 
 FT_O = $(patsubst %,%.o,$(FT) $(FT_OTHER))
 FT_O_OBJ = $(patsubst %,$(OBJ)%.o,$(FT) $(FT_OTHER))

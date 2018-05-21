@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 18:00:36 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/03 15:44:47 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/17 23:37:55 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static int	ft_stkminnext(t_stack *stk, int *ind)
 {
 	int i;
-	int j;
 	int c;
 
 	i = 0;
 	c = 0;
-	j = ft_stklen(stk) / 2;
 	*ind = stk->nb;
 	while (stk)
 	{
@@ -34,7 +32,7 @@ static int	ft_stkminnext(t_stack *stk, int *ind)
 	}
 	if (c == 1)
 		return (2);
-	return ((c <= j) ? 1 : 0);
+	return ((c <= i / 2) ? 1 : 0);
 }
 
 static void	ft_move(t_stack **stb, int pos, char **str)

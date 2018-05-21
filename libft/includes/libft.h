@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 16:29:32 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/09 18:09:35 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:55:23 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# define BUFF_SIZE 1000
+# define BUFF_SIZE 1
 
 typedef struct	s_list
 {

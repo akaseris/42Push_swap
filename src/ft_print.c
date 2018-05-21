@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 17:47:54 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/10 13:29:48 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:46:19 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	ft_printstacks(t_stack *stainit, t_stack *sta)
 	}
 }
 
-static void	ft_printusage(void)
+void		ft_printusage(void)
 {
 	ft_printf("Usage:\n./push_swap \"50 40 60\" OR ./checker \"50 40 60\"\n");
 	ft_printf("flags allowed: [-c (colored moves)] [-v (view stacks)]");
 	ft_printf("[-l (moves count)]\n\t\t[-h (hide moves)] [-u (view usage)]\n");
 	ft_printf("Combined use:\n./push_swap \"50 40 60\" | ");
-	ft_printf("./checker \"50 40 60\"\n(flags use whith");
+	ft_printf("./checker \"50 40 60\"\n(flags use with");
 	ft_printf(" pipe to other executables leads to undefined behaviour)\n");
 }
 
@@ -74,11 +74,8 @@ void		ft_printres(t_stack *sta, char **av, char *moves, char *flags)
 		ft_printstacks(stainit, sta);
 	if (ft_strchr(flags, 'l'))
 		ft_printf("\033[1;32mTotal moves:\033[0m\t%d\n", i);
-	while (sta)
+	while (stainit)
 	{
-		tmp = (sta)->next;
-		free(sta);
-		sta = tmp;
 		tmp = (stainit)->next;
 		free(stainit);
 		stainit = tmp;

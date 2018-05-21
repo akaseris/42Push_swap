@@ -6,7 +6,7 @@
 /*   By: akaseris <akaseris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/12 16:54:46 by akaseris          #+#    #+#             */
-/*   Updated: 2018/05/14 16:46:51 by akaseris         ###   ########.fr       */
+/*   Updated: 2018/05/15 21:17:20 by akaseris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,25 @@ static t_list	*ft_getlink(t_list **slst, int fd)
 	return (tmp);
 }
 
-static int		ft_line(char **line, char *content)
+static int		ft_line(char **line, char **content, char **str)
 {
 	char *s;
+	char *tmp;
 
+	free(*str);
+	tmp = *line;
 	if ((s = ft_strchr(*line, '\n')))
 	{
 		*s = '\0';
 		s++;
 		*line = ft_strdup(*line);
-		content = ft_strcpy(content, s);
+		*content = ft_strdup(s);
+		free(tmp);
 		return (2);
 	}
-	else if (ft_strlen(content) > 0)
+	else if (ft_strlen(*content) > 0)
 	{
-		*content = '\0';
+		**content = '\0';
 		return (1);
 	}
 	return (0);
@@ -70,10 +74,9 @@ int				get_next_line(const int fd, char **line)
 		str[s] = '\0';
 		*line = ft_strjoin(tmp->content, str);
 		if (s == 0)
-			return (ft_line(line, (char *)(tmp->content)));
+			return (ft_line(line, (char **)&(tmp->content), &str));
 		free(tmp->content);
 		tmp->content = *line;
 	}
-	free(str);
-	return (ft_line(line, (char *)(tmp->content)));
+	return (ft_line(line, (char **)&(tmp->content), &str));
 }
